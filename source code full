@@ -1,0 +1,81 @@
+org 100h
+
+.data
+;deklarasi variabel
+A db 0
+B db 0
+C db 0ah
+D db 0dh
+ 
+str1 db 'Masukkan besar segitiga: $ '
+
+.code
+;string output
+lea dx,str1
+mov ah,9
+int 21h
+;input nomor
+mov ah,1
+int 21h
+
+mov a,al
+sub a,48
+mov cl,a
+;spasi dan enter
+mov dl,c
+mov ah,2
+int 21h
+mov dl,d
+mov ah,2
+int 21h
+
+;atap
+atap:
+mov dx,45
+mov ah,2
+int 21h
+loop atap 
+
+;spasi dan enter
+mov dl,c
+mov ah,2
+int 21h
+mov dl,d
+mov ah,2
+int 21h
+
+;segitiga
+mov bl,1
+mov cl,a 
+   
+L1:
+push cx 
+mov ah,2
+mov dl,65 
+mov cl,bl
+            
+L2:
+int 21h
+inc dl
+    
+loop L2
+     
+mov ah,2
+mov dl,10
+int 21h
+mov dl,13
+int 21h
+inc bl
+
+pop cx     
+             
+loop L1 
+       
+;lantai
+mov cl,a
+
+lantai:
+mov dx,45
+mov ah,2
+int 21h
+loop lantai   
